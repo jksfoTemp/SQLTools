@@ -1,0 +1,54 @@
+USE [UTILITY]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[splitStringToTable]    Script Date: 9/11/2020 2:03:46 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE FUNCTION [dbo].[splitStringToTable] (@arg NVARCHAR(4000), @splitter NVARCHAR (1))
+RETURNS @output TABLE (singleVals NVARCHAR(4000)) 
+AS 
+BEGIN 
+
+	/*****************************************************************************
+	Joe Kelly 
+	2015-10-26 14:42:15.890
+
+	select * from splitStringToTable ('138|Š\225|á\225|á\225|á\', '\') 
+
+	Returns a table of KVP pairs. 
+
+	I.E.: '138|Š\225|á\225|á\225|á\'becomes 
+
+		138|Š
+		225|á
+		225|á
+		225|á
+
+	select * from splitStringToTable ('138|Š\225|á\225|á\225|á\', '\') 
+
+	*****************************************************************************/
+	DECLARE @i INT = 0, @j INT = 0, @l INT = 0 
+	SELECT @l = LEN (@arg) 
+	WHILE (@l > 0) 
+	BEGIN
+		-- TODO change this to an argument 
+		SELECT @i = PATINDEX ('%' + @splitter + '%', @arg) 
+		INSERT @output (singleVals) 
+		SELECT SUBSTRING (@arg, 0, @i) 
+
+		SELECT @arg = SUBSTRING (@arg, @i+1, @l - @i) 
+		
+		SELECT @l = LEN (@arg) 
+
+	END 
+	RETURN  
+END 
+
+GO
+
+
