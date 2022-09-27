@@ -1,0 +1,43 @@
+USE [UTILITY]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[fnGetErrorTryCatch]    Script Date: 9/11/2020 2:03:20 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE FUNCTION [dbo].[fnGetErrorTryCatch] () 
+RETURNS VARCHAR (MAX) 
+AS 
+BEGIN 
+/************************************************************************* 
+	Joe Kelly 2015-08-13 17:18:44.707 
+	Standard error response for when using try/catch blocks that stays in 
+	scope 
+	Syntax: 
+		BEGIN TRY 
+			SELECT 2/0 
+		END TRY 
+		BEGIN CATCH 
+			SELECT dbo.fnGetErrorTryCatch () 
+		END CATCH 
+*************************************************************************/ 
+
+	DECLARE @error VARCHAR (MAX) 
+	
+	SELECT @error = 
+	'ERROR_LINE: ' + CAST (ISNULL (ERROR_LINE(), 0) AS VARCHAR (MAX)) 
+	+ ' | ERROR_MESSAGE: ' + ISNULL (ERROR_MESSAGE(), 0) 
+	+ ' | ERROR_NUMBER: ' + CAST (ISNULL (ERROR_NUMBER(), 0) AS VARCHAR (MAX)) 
+	+ ' | ERROR_PROCEDURE: ' + ISNULL (ERROR_PROCEDURE(), 0) 
+	+ ' | ERROR_SEVERITY: ' + CAST (ISNULL (ERROR_SEVERITY(), 0) AS VARCHAR (MAX)) 
+	+ ' | ERROR_STATE: ' + CAST (ISNULL (ERROR_STATE(), 0) AS VARCHAR (MAX)); 
+	
+	RETURN @error 
+END
+
+GO
+
+
