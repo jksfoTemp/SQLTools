@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <span style="font-family: verdana; color: blue">Redirection to 
+      <a href="https://joeskb.blogspot.com/">Joe's KB
+      </a> in <span id="count-down">5</span> seconds ... 
+    </span>
+  </head>
+  <!-- Just a skeleton to help preview the blog contents: JKSFO.blogspot.com -->
+  <body>
+    <p style="text-align: center">
+      <span style="font-family: verdana; font-size: large">&nbsp;</span>
+      <a href="https://joeskb.blogspot.com/">
+        JKSFO - Joe's Knowledge Base
+      </a>
+    </p>
+    <p style="text-align: center"></p>
+    <p></p>
+    <p style="text-align: center">
+      <span style="font-family: verdana; font-size: medium" >
+        Git:&nbsp;<a href="https://github.com/JKSFO">
+          JKSFO
+        </a>
+      <br/>
+    </span>
+    </p>
+    <p style="text-align: center">
+      <span style="font-family: verdana; font-size: medium">
+        LinkedIn:&nbsp;
+        <a href="https://www.linkedin.com/in/jksforesume/">JKSFOResume</a>
+      </span>
+    </p>
+    <p style="text-align: center"><br /></p>
+  </body>
+
+<script>
+    window.history.pushState({}, "", window.location.href); 
+    document.body.style.cursor = 'wait'; // Set wait cursor
+    var countdownDiv = document.getElementById("count-down");
+    var timeLeft = 4; // Set initial countdown time (seconds)
+    var countdownInterval = setInterval(function() {
+      if (timeLeft > 0) {
+        countdownDiv.textContent = timeLeft;
+        timeLeft--;
+      } else {
+        clearInterval(countdownInterval); // Stop the timer after redirection
+        window.location.href = "https://joeskb.blogspot.com";
+      }
+    }, 1000); // Update every second
+  </script>
+
+</html>
