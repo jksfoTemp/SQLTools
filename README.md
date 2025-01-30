@@ -1,3 +1,6 @@
+"Not curated, historic file dump. Should be safe for PI."
+
+
 ## Mainly T-SQL but might be some ANSI for PostgreSQL and MySQL 
 
 A collection of tools for SQL Server administration and development. 
