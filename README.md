@@ -1,6 +1,6 @@
 # SQLTools
 A collection of tools for SQL Server administration and development  
- 
+# Adding comment 
 /*****************************************************************************
        Joe Kelly
        2015-09-29 13:00:54.183
